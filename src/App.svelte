@@ -20,11 +20,31 @@
       );
 </script>
 
-<h2 class="xl:bg-green-400">Count to 100</h2>
-<p>{$counter$}</p>
+<template lang="pug">
+  h2 Count to 100
+  div.some-class.bg-yellow-300
+    div {$counter$}
+</template>
 
-<style global lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+<style lang="postcss" global windi:global windi:preflights:global windi:safelist:global>
+  .some-class {
+    transition: {
+      property: opacity, border-width;
+      duration: 5s, 2s;
+    }
+    &:hover {
+      opacity: 0;
+      border-width: 50px;
+    }
+    width: 500px;
+    border: {
+      style: solid;
+      width: 10px;
+      left-color: green;
+      right-color: magenta;
+    }
+    div {
+      color: red;
+    }
+  }
 </style>

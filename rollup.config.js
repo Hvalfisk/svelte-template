@@ -6,6 +6,11 @@ import {terser} from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import autoprefixer from 'autoprefixer';
+import nested from 'postcss-nested'
+import nestedProps from 'postcss-nested-props';
+import nestedAncestors from 'postcss-nested-ancestors';
+import {windi} from 'svelte-windicss-preprocess'
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,13 +45,20 @@ export default {
   },
   plugins: [
     svelte({
-      preprocess: sveltePreprocess({
-        sourceMap: !production,
-        postcss: [
-          require('tailwindcss'),
-          require('autoprefixer')
-        ]
-      }),
+      preprocess: [
+        sveltePreprocess({
+          sourceMap: !production,
+          postcss: {
+            plugins: [
+              nestedAncestors,
+              nested,
+              nestedProps,
+              autoprefixer
+            ]
+          },
+        }),
+        windi({mode: production ? 'production' : 'development'})
+      ],
       compilerOptions: {
         // enable run-time checks when not in production
         dev: !production
