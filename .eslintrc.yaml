@@ -25,7 +25,7 @@ overrides:
   - files:
       - '*.svelte'
     processor: svelte3/svelte3
-ignorePatterns: src/main.ts
+ignorePatterns: ['src/main.ts', '*.config.js']
 rules:
   no-var: warn
   no-param-reassign:

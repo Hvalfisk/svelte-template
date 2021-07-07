@@ -1,18 +1,30 @@
 <script lang="ts">
-  import { interval, Observable, scan, startWith, takeWhile, withLatestFrom } from 'rxjs';
-  import { map } from 'rxjs/operators';
+  import { fromEvent, interval, map, merge, Observable, scan, startWith, takeWhile, withLatestFrom } from 'rxjs';
 
-  const direction$: Observable<1 | -1> = interval(1000).pipe(map(() => Math.random() > 0.3 ? 1 : -1), startWith(1));
+  const direction$: Observable<1 | -1> =
+    merge(
+      interval(3000)
+        .pipe(
+          map(() => Math.random() > 0.7 ? 1 : -1),
+          startWith(1)
+        ),
+      fromEvent(document, 'click').pipe(map(() => 1))
+    );
   const counter$: Observable<number> =
-    interval(1000)
+    interval(100)
       .pipe(
         startWith(0),
         withLatestFrom(direction$, (_, d) => d),
-        scan((acc, d) => acc + d, 0),
-        takeWhile(i => i <= 10)
+        scan((acc, d) => Math.max(0, acc + d), 0),
+        takeWhile(i => i <= 100)
       );
 </script>
 
-<h2>Count to 10</h2>
+<h2 class="xl:bg-green-400">Count to 100</h2>
+<p>{$counter$}</p>
 
-{$counter$}
+<style global lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+</style>
