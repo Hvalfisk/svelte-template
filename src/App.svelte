@@ -36,7 +36,7 @@
       opacity: 0;
       border-width: 50px;
     }
-    width: 500px;
+    size: 500px 200px;
     border: {
       style: solid;
       width: 10px;

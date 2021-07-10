@@ -27,6 +27,7 @@
     "postcss-nested": "^5.0.5",
     "postcss-nested-ancestors": "^2.0.0",
     "postcss-nested-props": "^2.0.0",
+    "postcss-size": "^4.0.1",
     "pug": "^3.0.2",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",

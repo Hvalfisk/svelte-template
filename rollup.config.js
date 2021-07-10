@@ -1,16 +1,17 @@
 import svelte from 'rollup-plugin-svelte';
+import sveltePreprocess from 'svelte-preprocess';
+import {windi} from 'svelte-windicss-preprocess'
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import livereload from 'rollup-plugin-livereload';
 import {terser} from 'rollup-plugin-terser';
-import sveltePreprocess from 'svelte-preprocess';
-import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 import autoprefixer from 'autoprefixer';
 import nested from 'postcss-nested'
 import nestedProps from 'postcss-nested-props';
 import nestedAncestors from 'postcss-nested-ancestors';
-import {windi} from 'svelte-windicss-preprocess'
+import size from 'postcss-size';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -53,6 +54,7 @@ export default {
               nestedAncestors,
               nested,
               nestedProps,
+              size,
               autoprefixer
             ]
           },
