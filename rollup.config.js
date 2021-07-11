@@ -1,18 +1,10 @@
 import svelte from 'rollup-plugin-svelte';
-import sveltePreprocess from 'svelte-preprocess';
-import {windi} from 'svelte-windicss-preprocess'
-import commonjs from '@rollup/plugin-commonjs';
+import commonJs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import livereload from 'rollup-plugin-livereload';
-import {terser} from 'rollup-plugin-terser';
-import css from 'rollup-plugin-css-only';
-import autoprefixer from 'autoprefixer';
-import nested from 'postcss-nested'
-import nestedProps from 'postcss-nested-props';
-import nestedAncestors from 'postcss-nested-ancestors';
-import size from 'postcss-size';
-import simpleVars from 'postcss-simple-vars';
+import liveReload from 'rollup-plugin-livereload';
+import { terser } from 'rollup-plugin-terser';
+import cssOnly from 'rollup-plugin-css-only';
+import { generateConfig } from './svelte.config.js';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,38 +32,16 @@ function serve() {
 export default {
   input: 'src/main.ts',
   output: {
-    sourcemap: true,
+    sourcemap: !production,
     format: 'iife',
     name: 'app',
     file: 'public/build/bundle.js'
   },
   plugins: [
-    svelte({
-      preprocess: [
-        sveltePreprocess({
-          sourceMap: !production,
-          postcss: {
-            plugins: [
-              simpleVars,
-              nestedAncestors,
-              nested,
-              nestedProps,
-              size,
-              autoprefixer
-            ]
-          },
-        }),
-        windi({mode: production ? 'production' : 'development'})
-      ],
-      compilerOptions: {
-        // enable run-time checks when not in production
-        dev: !production,
-        immutable: true
-      }
-    }),
+    svelte(generateConfig(production)),
     // we'll extract any component CSS out into
     // a separate file - better for performance
-    css({output: 'bundle.css'}),
+    cssOnly({ output: 'bundle.css' }),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
@@ -82,11 +52,7 @@ export default {
       browser: true,
       dedupe: ['svelte']
     }),
-    commonjs(),
-    typescript({
-      sourceMap: !production,
-      inlineSources: !production
-    }),
+    commonJs(),
 
     // In dev mode, call `npm run start` once
     // the bundle has been generated
@@ -94,7 +60,7 @@ export default {
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
-    !production && livereload('public'),
+    !production && liveReload('public'),
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify

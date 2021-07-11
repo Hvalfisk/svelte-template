@@ -1,16 +1,20 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
-
-  "include": ["src/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
-
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/*",
+    "__sapper__/*",
+    "public/*",
+    "*.config.js"
+  ],
   "compilerOptions": {
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "declaration": false,
-    "sourceMap": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
