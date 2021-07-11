@@ -12,6 +12,7 @@ import nested from 'postcss-nested'
 import nestedProps from 'postcss-nested-props';
 import nestedAncestors from 'postcss-nested-ancestors';
 import size from 'postcss-size';
+import simpleVars from 'postcss-simple-vars';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -51,6 +52,7 @@ export default {
           sourceMap: !production,
           postcss: {
             plugins: [
+              simpleVars,
               nestedAncestors,
               nested,
               nestedProps,
@@ -63,7 +65,8 @@ export default {
       ],
       compilerOptions: {
         // enable run-time checks when not in production
-        dev: !production
+        dev: !production,
+        immutable: true
       }
     }),
     // we'll extract any component CSS out into

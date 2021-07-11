@@ -6,6 +6,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear",
+    "host": "sirv public --no-clear --host",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -27,6 +28,7 @@
     "postcss-nested": "^5.0.5",
     "postcss-nested-ancestors": "^2.0.0",
     "postcss-nested-props": "^2.0.0",
+    "postcss-simple-vars": "^6.0.3",
     "postcss-size": "^4.0.1",
     "pug": "^3.0.2",
     "rollup": "^2.3.4",

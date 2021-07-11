@@ -24,8 +24,8 @@ extends:
 overrides:
   - files:
       - '*.svelte'
-    processor: svelte3/svelte3
-ignorePatterns: ['src/main.ts', '*.config.js']
+    processor: 'svelte3/svelte3'
+ignorePatterns: ['src/main.ts', '*.config.js', '.eslintrc.js']
 rules:
   no-var: warn
   no-param-reassign:
@@ -166,7 +166,7 @@ rules:
   eqeqeq:
     - error
     - always
-  no-shadow: off
+  no-shadow: 'off'
   "@typescript-eslint/no-shadow": error
   "@typescript-eslint/consistent-indexed-object-style": error
   "@typescript-eslint/consistent-type-assertions":
@@ -229,7 +229,7 @@ rules:
   "@typescript-eslint/prefer-string-starts-ends-with": warn
   "@typescript-eslint/require-array-sort-compare": warn
   "@typescript-eslint/strict-boolean-expressions": warn
-  dot-notation: off
+  dot-notation: 'off'
   "@typescript-eslint/dot-notation": warn
   brace-style: 'off'
   "@typescript-eslint/brace-style": warn
